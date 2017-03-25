@@ -1,5 +1,8 @@
-package pl.akubarek.fitcare;
+package pl.akubarek.fitcare.ui.productList;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,8 +11,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.List;
+
+import pl.akubarek.fitcare.R;
+import pl.akubarek.fitcare.model.Product;
 
 public class ProductListActivity extends AppCompatActivity {
+
+    private Context context = ProductListActivity.this;
+
+    private ListView productListView;
+
+    private static List <Product> products;
+
+    private Cursor cursor;
+    private SQLiteDatabase db;
+
+    private final static String TAG = ProductListActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
