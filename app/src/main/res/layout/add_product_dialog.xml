@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minWidth="300dp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:id="@+id/linear"
+    android:padding="30dp">
+
+    <TextView
+        android:text="@string/dialog_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="14sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editName"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:hint="@string/hint_name_dialog"
+        android:inputType="text" />
+
+    <TextView
+        android:text="@string/dialog_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCategory"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="14sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editCategory"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:hint="@string/hint_category_dialog" />
+
+    <TextView
+        android:text="@string/dialog_calories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCalories"
+        android:textAlignment="center"
+        android:textStyle="normal|bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editCalories"
+        android:hint="@string/hint_calories_dialog"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:text="@string/dialog_protein"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textProtein"
+        android:textAlignment="center"
+        android:textStyle="normal|bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editProtein"
+        android:hint="@string/hint_protein_dialog"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:text="@string/dialog_carbs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCarbs"
+        android:textAlignment="center"
+        android:textStyle="normal|bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editCarbs"
+        android:hint="@string/hint_carbs_dialog"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:text="@string/dialog_fat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textFat"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editFat"
+        android:hint="@string/hint_fat_dialog"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:inputType="numberDecimal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:text="@string/button_add_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_add"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="@string/button_cancel_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_cancel"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>
