@@ -15,4 +15,12 @@ public class Constants {
     public static final String COLUMN_PROTEIN = "protein";
     public static final String COLUMN_FAT = "fat";
     public static final String COLUMN_CARBS = "carbs";
+
+    // shopping list additional fields
+    public static final String SHOPPING_TABLE = "shoppings";
+    public static final String COLUMN_MEAL_ID = "mealid";
+
+    // transaction list fields
+    public static final String MEALS_TABLE = "meals";
+    public final static String COLUMN_DATE_CREATED = "create_date";
 }

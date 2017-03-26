@@ -29,6 +29,15 @@ public class Product {
         this.fat = fat;
     }
 
+
+    public void updateWeight (int newWeight) {
+        setCalories((newWeight*getCalories())/this.weight);
+        setCarbs((newWeight*getCarbs())/this.weight);
+        setFat((newWeight*getFat())/this.weight);
+        setProtein((newWeight*getProtein())/this.weight);
+        setWeight(newWeight);
+    }
+
     public long getId() {
         return id;
     }
