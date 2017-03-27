@@ -24,7 +24,7 @@ import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.model.Product;
 
 
-public class ProductListActivity extends AppCompatActivity {
+public class ProductListActivity extends AppCompatActivity implements DatabaseContract{
 
     private Context context = ProductListActivity.this;
 
@@ -85,12 +85,6 @@ public class ProductListActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.add_product_dialog);
 
         // find dialog fields;
-        TextView textName = (TextView) dialog.findViewById(R.id.textName);
-        TextView textCategory = (TextView) dialog.findViewById(R.id.textCategory);
-        TextView textCalories = (TextView) dialog.findViewById(R.id.textCalories);
-        TextView textProtein = (TextView) dialog.findViewById(R.id.textProtein);
-        TextView textCarbs = (TextView) dialog.findViewById(R.id.textCarbs);
-        TextView textFat = (TextView) dialog.findViewById(R.id.textFat);
         final EditText editName = (EditText) dialog.findViewById(R.id.editName);
         final EditText editCategory = (EditText) dialog.findViewById(R.id.editCategory);
         final EditText editCalories = (EditText) dialog.findViewById(R.id.editCalories);
@@ -124,7 +118,7 @@ public class ProductListActivity extends AppCompatActivity {
                     // !!!!!!!!!!!!!!!!  DODAWANIE OBIEKTU DO BAZY
                     Product product = new Product(name, category, calories, protein, carbs, fat);
                     addProductToDatabase();
-
+                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                     Toast.makeText(context, name + "\n" + category + "\n" + product.getWeight() + "\n" + calories + "\n" + protein + "\n" + carbs + "\n" + fat, Toast.LENGTH_LONG).show();
                     dialog.dismiss();
@@ -134,5 +128,36 @@ public class ProductListActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        // poskladany product z dialogu
+        // 1. Insertnac go do bazy
+        // 2. Wyciagnac go z bazy
+        // 3. Wrzucic do arrayListy z bazodanowym ID
+        // 4. Po wykonaniu w którymś momencie zadbać o refresh adaptera (onResume?)
+
+    }
+
+    @Override
+    public Product findNewestProductInTable() {
+        // Realizacja 2 pktu z addProduct, ewentualnie statyczna metoda w modelu produktu
+        // SELECT produkt z najwiekszym id (dzieki autoincrement)
+        return null;
+    }
+
+    @Override
+    public void deleteProduct(Product product, int itemPosition) {
+        // wykonac w onLongItemClick
+        // 1. Wyciagnac z obiektu id i usunąc ten rekord z bazy
+        // 2. itemPosition to id obiektu w liscie ... również usunąć
+        // 3. Po wykonaniu zadbać o refresh adaptera
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        // wywolywac ta funkcje w onCreate vs onStart ?
+        return null;
     }
 }

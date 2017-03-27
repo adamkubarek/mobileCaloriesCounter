@@ -16,7 +16,6 @@ public class Product {
     private long transactionId;
 
     public Product () {
-
     }
 
     public Product(String name, String category, int calories, double protein, double carbs, double fat) {
@@ -30,6 +29,7 @@ public class Product {
     }
 
 
+    // method for mass dialog
     public void updateWeight (int newWeight) {
         setCalories((newWeight*getCalories())/this.weight);
         setCarbs((newWeight*getCarbs())/this.weight);

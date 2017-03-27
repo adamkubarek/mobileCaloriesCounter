@@ -28,6 +28,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "Product list table created");
         Log.d(TAG, CREATE_PRODUCT_TABLE);
+
+        db.execSQL(CREATE_SHOPPING_TABLE);
+
+        Log.d(TAG, "Shopping cart created");
+        Log.d(TAG, CREATE_SHOPPING_TABLE);
+
+        db.execSQL(CREATE_MEALS_TABLE);
+        Log.d(TAG, "Meals cart created");
+        Log.d(TAG, CREATE_MEALS_TABLE);
     }
 
     @Override
@@ -46,7 +55,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + Constants.COLUMN_CARBS + " NUMERIC);";
 
     private static final String CREATE_SHOPPING_TABLE =
+            "CREATE TABLE " + Constants.SHOPPING_TABLE + "("
+                    + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + Constants.COLUMN_NAME + " TEXT, "
+                    + Constants.COLUMN_CATEGORY + " TEXT, "
+                    + Constants.COLUMN_WEIGHT + " INTEGER, "
+                    + Constants.COLUMN_CALORIES + " INTEGER, "
+                    + Constants.COLUMN_PROTEIN + " NUMERIC, "
+                    + Constants.COLUMN_FAT + " NUMERIC, "
+                    + Constants.COLUMN_CARBS + " NUMERIC, "
+                    + Constants.COLUMN_MEAL_ID + " INTEGER);";
 
+    private static final String CREATE_MEALS_TABLE =
+            "CREATE TABLE " + Constants.MEALS_TABLE + "("
+                    + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + Constants.COLUMN_NAME + " TEXT, "
+                    + Constants.COLUMN_DATE_CREATED + " BIGINT);";
 
 
 }
