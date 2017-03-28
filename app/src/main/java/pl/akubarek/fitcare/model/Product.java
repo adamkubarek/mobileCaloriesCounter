@@ -1,5 +1,9 @@
 package pl.akubarek.fitcare.model;
 
+import android.database.Cursor;
+
+import pl.akubarek.fitcare.util.Constants;
+
 /**
  * Created by BloodyFire on 25.03.2017.
  */
@@ -14,6 +18,29 @@ public class Product {
     private double carbs;
     private double fat;
     private long transactionId;
+
+    public static Product getProductFromCursor(Cursor cursor) {
+        long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
+        String name = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME));
+        String category = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CATEGORY));
+        int weight = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_WEIGHT));
+        double protein = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_PROTEIN));
+        double carbs = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_CARBS));
+        double fat = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_FAT));
+        int calories = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_CALORIES));
+
+        Product product = new Product();
+        product.setId(id);
+        product.setName(name);
+        product.setCategory(category);
+        product.setWeight(weight);
+        product.setProtein(protein);
+        product.setCarbs(carbs);
+        product.setFat(fat);
+        product.setCalories(calories);
+
+        return product;
+    }
 
     public Product () {
     }
@@ -109,4 +136,6 @@ public class Product {
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
+
+
 }

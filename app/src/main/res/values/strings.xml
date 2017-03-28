@@ -15,4 +15,11 @@
     <string name="dialog_protein">Suma białek na 100g</string>
     <string name="dialog_carbs">Suma węglowodanów na 100g</string>
     <string name="dialog_fat">Suma tłuszczy na 100g</string>
+    <string name="product_list_row_category">Kategoria</string>
+    <string name="product_list_row_name">Nazwa</string>
+    <string name="product_list_row_protein">Białko:</string>
+    <string name="product_list_row_fat">Tłuszcze:</string>
+    <string name="product_list_row_carbs">Węglowodany:</string>
+    <string name="default_numeric_grams_value">0,00g</string>
+    <string name="default_numeric_calories_value">0 kcal</string>
 </resources>
