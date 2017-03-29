@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,10 +29,13 @@ import java.util.List;
 import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
+import pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity;
 import pl.akubarek.fitcare.util.Constants;
 
 
-public class ProductListActivity extends AppCompatActivity implements DatabaseContract, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener{
+public class ProductListActivity extends AppCompatActivity implements DatabaseContract,
+        AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener{
+
     private Context context = ProductListActivity.this;
 
     private ListView productListView;
@@ -277,6 +281,8 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
         Toast.makeText(context,"Item position : " + i , Toast.LENGTH_SHORT).show();
         Toast.makeText(context,"db ID : " + products.get(i).getId() , Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context, ShoppingCartActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -21,4 +21,9 @@
     <string name="product_list_row_carbs">Węglowodany:</string>
     <string name="default_numeric_grams_value">0,00g</string>
     <string name="default_numeric_calories_value">0 kcal</string>
+    <string name="button_make_tansaction">Zrealizuj</string>
+    <string name="button_clear_shoppingCart">Wyczyść koszyk</string>
+    <string name="text_calories">Kalorie:</string>
+    <string name="default_calories_number">0 kcal</string>
+    <string name="default_quantity_value">0g</string>
 </resources>
