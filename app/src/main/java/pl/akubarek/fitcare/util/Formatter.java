@@ -21,4 +21,10 @@ public class Formatter {
 
         return result;
     }
+
+    public static String formatQuantity (int number) {
+        String result = Integer.toString(number) + "g";
+
+        return result;
+    }
 }

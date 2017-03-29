@@ -28,4 +28,8 @@
     <string name="text_calories">Kalorie:</string>
     <string name="default_calories_number">0 kcal</string>
     <string name="default_quantity_value">0g</string>
+    <string name="text_number_weight_dialog">Podaj liczbę gramów produktu:</string>
+    <string name="number_weight_dialog_hint">0g</string>
+    <string name="weight_number_dialog_confirm">Ok</string>
+    <string name="weight_numbe_dialog_cancel">Anuluj</string>
 </resources>

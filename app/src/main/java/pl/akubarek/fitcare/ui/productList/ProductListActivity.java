@@ -188,6 +188,40 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         dialog.show();
     }
 
+    private void displaySetQuantityDialog(int position) {
+        final Product product = products.get(position);
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.set_quantity_dialog);
+        // find dialog fields
+        final EditText editQuantity = (EditText) dialog.findViewById(R.id.editQuantity);
+        Button btnAdd = (Button) dialog.findViewById(R.id.send_product_btn);
+        Button btnCancel = (Button) dialog.findViewById(R.id.cancel_action_btn);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!editQuantity.getText().toString().isEmpty() && product != null) {
+                    int newWeight = Integer.valueOf(editQuantity.getText().toString());
+                    product.updateWeight(newWeight);
+                    dialog.dismiss();
+                    Intent intent = new Intent(context, ShoppingCartActivity.class);
+                    intent.putExtra(Constants.PARCELABLE_PRODUCT, product);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(context, "Uzupełnij odpowiednio wszystkie pola", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+
+
+    }
+
     @Override
     public void addProduct(Product product) {
         // poskladany product z dialogu
@@ -277,13 +311,17 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-        Toast.makeText(context,"Item position : " + i , Toast.LENGTH_SHORT).show();
-        Toast.makeText(context,"db ID : " + products.get(i).getId() , Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context, ShoppingCartActivity.class);
-        startActivity(intent);
+        displaySetQuantityDialog(position);
+        //Toast.makeText(context,"Item position : " + position , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context,"db ID : " + products.get(position).getId() , Toast.LENGTH_SHORT).show();
+        //Intent intent = new Intent(context, ShoppingCartActivity.class);
+
+        //startActivity(intent);
     }
+
+
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {

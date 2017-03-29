@@ -1,6 +1,8 @@
 package pl.akubarek.fitcare.model;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import pl.akubarek.fitcare.util.Constants;
 
@@ -8,7 +10,7 @@ import pl.akubarek.fitcare.util.Constants;
  * Created by BloodyFire on 25.03.2017.
  */
 
-public class Product {
+public class Product implements Parcelable {
     private long id;
     private String name;
     private String category;
@@ -18,6 +20,48 @@ public class Product {
     private double carbs;
     private double fat;
     private long transactionId;
+
+    protected Product(Parcel in) {
+        id = in.readLong();
+        name = in.readString();
+        category = in.readString();
+        weight = in.readInt();
+        calories = in.readInt();
+        protein = in.readDouble();
+        carbs = in.readDouble();
+        fat = in.readDouble();
+        transactionId = in.readLong();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(name);
+        parcel.writeString(category);
+        parcel.writeInt(weight);
+        parcel.writeInt(calories);
+        parcel.writeDouble(protein);
+        parcel.writeDouble(carbs);
+        parcel.writeDouble(fat);
+        parcel.writeLong(transactionId);
+    }
 
     public static Product getProductFromCursor(Cursor cursor) {
         long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
