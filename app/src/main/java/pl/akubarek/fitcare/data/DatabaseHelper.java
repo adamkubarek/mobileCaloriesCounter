@@ -13,7 +13,7 @@ import pl.akubarek.fitcare.util.Constants;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private final static int DB_VERSION = 1;
+    private final static int DB_VERSION = 2;
     private final static String DB_NAME = "fitcare.db";
 
     private final static String TAG = DatabaseHelper.class.getSimpleName();
@@ -37,10 +37,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_MEALS_TABLE);
         Log.d(TAG, "Meals cart created");
         Log.d(TAG, CREATE_MEALS_TABLE);
+
+
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL(CREATE_TEMP_SHOPPING_CART);
     }
 
     private static final String CREATE_PRODUCT_TABLE =
@@ -71,6 +74,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + Constants.COLUMN_NAME + " TEXT, "
                     + Constants.COLUMN_DATE_CREATED + " BIGINT);";
+
+    private static final String CREATE_TEMP_SHOPPING_CART =
+            "CREATE TABLE " + Constants.TEMP_CART_TABLE + "("
+                    + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + Constants.COLUMN_NAME + " TEXT, "
+                    + Constants.COLUMN_CATEGORY + " TEXT, "
+                    + Constants.COLUMN_WEIGHT + " INTEGER, "
+                    + Constants.COLUMN_CALORIES + " INTEGER, "
+                    + Constants.COLUMN_PROTEIN + " NUMERIC, "
+                    + Constants.COLUMN_FAT + " NUMERIC, "
+                    + Constants.COLUMN_CARBS + " NUMERIC);";
 
 
 }

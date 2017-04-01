@@ -14,4 +14,5 @@ public interface DatabaseContract {
     Product findNewestProductInTable();
     void deleteProduct (Product product, int itemPosition);
     List<Product> getAllProducts();
+    void addToTempShoppingCart(Product product);
 }

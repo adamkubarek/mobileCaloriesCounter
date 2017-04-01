@@ -63,11 +63,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         productListView = (ListView) findViewById(R.id.product_list_view);
         products = getAllProducts();
 
-//        for (Product product : products) {
-//            System.out.println(product.getName());
-//            System.out.println(product.getCalories());
-//        }
-
         ProductListAdapter productAdapter = new ProductListAdapter(context, products);
         productListView.setAdapter(productAdapter);
 
@@ -125,7 +120,9 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_shopping_cart) {
+            Intent intent = new Intent(context, ShoppingCartActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -134,7 +131,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     public void displayAddProductDialog () {
         final Dialog dialog = new Dialog(context);
-
         dialog.setContentView(R.layout.add_product_dialog);
 
         // find dialog fields;
@@ -147,7 +143,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
         Button buttonAdd = (Button) dialog.findViewById(R.id.button_add);
         Button buttonCancel = (Button) dialog.findViewById(R.id.button_cancel);
-
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,18 +162,13 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                     double protein = Double.valueOf(editProtein.getText().toString());
                     double carbs = Double.valueOf(editCarbs.getText().toString());
                     double fat = Double.valueOf(editFat.getText().toString());
-
                     // !!!!!!!!!!!!!!!!  DODAWANIE OBIEKTU DO BAZY
                     Product product = new Product(name, category, calories, protein, carbs, fat);
                     addProduct(product);
-                    // somehow refresh adapter here or in onResume Method
-                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                    // aktualizacja
                     ProductListAdapter productAdapter = new ProductListAdapter(context, products);
                     productListView.setAdapter(productAdapter);
 
-                    //Toast.makeText(context, name + "\n" + category + "\n" + product.getWeight() + "\n" + calories + "\n" + protein + "\n" + carbs + "\n" + fat, Toast.LENGTH_LONG).show();
                     dialog.dismiss();
                 } else {
                     Toast.makeText(context, "Uzupełnij odpowiednio wszystkie pola", Toast.LENGTH_SHORT).show();
@@ -188,7 +178,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         dialog.show();
     }
 
-    private void displaySetQuantityDialog(int position) {
+    private void displaySetQuantityDialog(final int position) {
         final Product product = products.get(position);
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.set_quantity_dialog);
@@ -209,8 +199,8 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                     int newWeight = Integer.valueOf(editQuantity.getText().toString());
                     product.updateWeight(newWeight);
                     dialog.dismiss();
+                    addToTempShoppingCart(product);
                     Intent intent = new Intent(context, ShoppingCartActivity.class);
-                    intent.putExtra(Constants.PARCELABLE_PRODUCT, product);
                     startActivity(intent);
                 } else {
                     Toast.makeText(context, "Uzupełnij odpowiednio wszystkie pola", Toast.LENGTH_SHORT).show();
@@ -247,6 +237,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             Product productWithId = findNewestProductInTable();
             if (productWithId != null) {
                 products.add(productWithId);
+                Toast.makeText(context, "Dodano nowy produkt", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "Nie udało dodać się produktu do listy", Toast.LENGTH_SHORT).show();
             }
@@ -256,6 +247,25 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         // 3. Wrzucic do arrayListy z bazodanowym ID
         // 4. Po wykonaniu w którymś momencie zadbać o refresh adaptera (onResume?)
 
+    }
+
+    @Override
+    public void addToTempShoppingCart(Product product) {
+        ContentValues values = new ContentValues();
+        values.put(Constants.COLUMN_NAME, product.getName());
+        values.put(Constants.COLUMN_CATEGORY, product.getCategory());
+        values.put(Constants.COLUMN_WEIGHT, product.getWeight());
+        values.put(Constants.COLUMN_CALORIES, product.getCalories());
+        values.put(Constants.COLUMN_PROTEIN, product.getProtein());
+        values.put(Constants.COLUMN_CARBS, product.getCarbs());
+        values.put(Constants.COLUMN_FAT, product.getFat());
+
+        try {
+            db.insertOrThrow(Constants.TEMP_CART_TABLE, null, values);
+        } catch (SQLException e) {
+            Toast.makeText(context, "Nie udało się dodać produktu", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
@@ -285,6 +295,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                 products.remove(itemPosition);
                 ProductListAdapter productAdapter = new ProductListAdapter(context, products);
                 productListView.setAdapter(productAdapter);
+                Toast.makeText(context, "Usunięto produkt", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "Nie udało się usunąć produktu", Toast.LENGTH_SHORT).show();
             }
@@ -295,7 +306,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     @Override
     public List<Product> getAllProducts() {
-        // wywolywac ta funkcje w onCreate vs onStart ? - Decyzja - onStart
         List <Product> products = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + Constants.PRODUCT_TABLE;
@@ -312,13 +322,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
         displaySetQuantityDialog(position);
-        //Toast.makeText(context,"Item position : " + position , Toast.LENGTH_SHORT).show();
-        //Toast.makeText(context,"db ID : " + products.get(position).getId() , Toast.LENGTH_SHORT).show();
-        //Intent intent = new Intent(context, ShoppingCartActivity.class);
-
-        //startActivity(intent);
     }
 
 
@@ -326,7 +330,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
         final Product product = products.get(position);
-
 
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setCancelable(true);

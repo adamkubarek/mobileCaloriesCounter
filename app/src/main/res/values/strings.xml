@@ -32,4 +32,7 @@
     <string name="number_weight_dialog_hint">0g</string>
     <string name="weight_number_dialog_confirm">Ok</string>
     <string name="weight_numbe_dialog_cancel">Anuluj</string>
+    <string name="product_activity_label">Wybierz produkty</string>
+    <string name="shopping_cart_activity_label">Wybrane produkty</string>
+    <string name="option_menu_shopping_cart">Koszyk</string>
 </resources>

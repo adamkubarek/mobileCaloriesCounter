@@ -28,5 +28,5 @@ public class Constants {
     public static final String PARCELABLE_PRODUCT = "parcelable_product";
 
     // shopping cart (Parcelable items) in bundle
-    public static final String PREVIOUS_ITEMS = "previous_items";
+    public static final String TEMP_CART_TABLE = "tempshop";
 }
