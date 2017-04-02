@@ -42,4 +42,5 @@
     <string name="title_activity_transaction_list">TransactionListActivity</string>
     <string name="transaction_list_made">Utworzone jadłospisy</string>
     <string name="product_list_menu_item">Lista produktów</string>
+    <string name="title_activity_transaction_list_detail">TransactionListDetailActivity</string>
 </resources>

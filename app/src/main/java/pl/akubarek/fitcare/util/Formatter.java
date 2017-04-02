@@ -1,6 +1,9 @@
 package pl.akubarek.fitcare.util;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by BloodyFire on 28.03.2017.
@@ -26,5 +29,10 @@ public class Formatter {
         String result = Integer.toString(number) + "g";
 
         return result;
+    }
+
+    public static String formatDate(long date) {
+        String displayDate = new SimpleDateFormat("dd MMMM", new Locale("pl", "DEU")).format(new Date(date));
+        return displayDate;
     }
 }

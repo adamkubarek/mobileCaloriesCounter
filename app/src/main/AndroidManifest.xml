@@ -25,7 +25,16 @@
         <activity
             android:name=".ui.transactionList.TransactionListActivity"
             android:label="@string/title_activity_transaction_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.transactionList.TransactionListDetailActivity"
+            android:label="@string/title_activity_transaction_list_detail"
+            android:parentActivityName=".ui.transactionList.TransactionListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.akubarek.fitcare.ui.transactionList.TransactionListActivity" />
+        </activity>
     </application>
 
 </manifest>
