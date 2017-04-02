@@ -1,4 +1,4 @@
-package pl.akubarek.fitcare.ui.shoppingCart;
+package pl.akubarek.fitcare.ui.transactionList;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,15 +15,15 @@ import pl.akubarek.fitcare.model.Product;
 import pl.akubarek.fitcare.util.Formatter;
 
 /**
- * Created by BloodyFire on 29.03.2017.
+ * Created by BloodyFire on 02.04.2017.
  */
 
-public class ShoppingCartAdapter extends ArrayAdapter<Product> {
+public class TransactionListDetailAdapter  extends ArrayAdapter<Product> {
 
-    List<Product> products;
+    List <Product> products;
 
-    public ShoppingCartAdapter(Context context, List<Product> products) {
-        super(context, R.layout.shopping_cart_list_row, products);
+    public TransactionListDetailAdapter(Context context, List<Product> products) {
+        super(context, R.layout.transaction_list_detail_row, products);
         this.products = products;
     }
 
@@ -50,14 +50,14 @@ public class ShoppingCartAdapter extends ArrayAdapter<Product> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.shopping_cart_list_row, parent, false);
+            convertView = inflater.inflate(R.layout.transaction_list_detail_row, parent, false);
 
             viewHolder.name = (TextView) convertView.findViewById(R.id.detail_list_product_name);
-            viewHolder.quantity = (TextView) convertView.findViewById(R.id.shopping_product_quantity);
+            viewHolder.quantity = (TextView) convertView.findViewById(R.id.detail_list_product_quantity);
             viewHolder.protein = (TextView) convertView.findViewById(R.id.detail_list_value_protein);
-            viewHolder.carbs = (TextView) convertView.findViewById(R.id.sh_value_carbs);
+            viewHolder.carbs = (TextView) convertView.findViewById(R.id.detail_list_value_carbs);
             viewHolder.fat = (TextView) convertView.findViewById(R.id.detail_list_value_fat);
-            viewHolder.calories = (TextView) convertView.findViewById(R.id.sh_value_calories);
+            viewHolder.calories = (TextView) convertView.findViewById(R.id.detail_list_value_calories);
 
             convertView.setTag(viewHolder);
         } else {

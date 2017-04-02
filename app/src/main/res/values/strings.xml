@@ -43,4 +43,7 @@
     <string name="transaction_list_made">Utworzone jadłospisy</string>
     <string name="product_list_menu_item">Lista produktów</string>
     <string name="title_activity_transaction_list_detail">TransactionListDetailActivity</string>
+    <string name="meals_set_created_activity">Utworzone jadłospisy</string>
+    <string name="meals_details_activity">Szczegóły jadłospisu</string>
+    <string name="empty_shopping_cart_text">Ta lista jest pusta, dodaj produkty</string>
 </resources>

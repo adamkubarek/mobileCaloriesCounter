@@ -16,7 +16,8 @@
         android:id="@+id/meal_plan_text"
         android:textAlignment="center"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/colorSecondaryText" />
 
     <EditText
         android:layout_width="match_parent"
@@ -25,7 +26,8 @@
         android:ems="10"
         android:id="@+id/edit_meal_name"
         android:hint="@string/meal_transaction_edit_text_hint"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondaryText" />
 
     <LinearLayout
         android:orientation="horizontal"

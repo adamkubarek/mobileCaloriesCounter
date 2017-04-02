@@ -89,6 +89,7 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Toast.makeText(context, String.valueOf(transactions.get(position).getId()), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, TransactionListDetailActivity.class);
+        intent.putExtra(Constants.TRANSACTION_ID, transactions.get(position).getId());
         startActivity(intent);
     }
 

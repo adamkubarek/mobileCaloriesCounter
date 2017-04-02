@@ -26,4 +26,7 @@ public class Constants {
 
     // shopping cart (Parcelable items) in bundle
     public static final String TEMP_CART_TABLE = "tempshop";
+
+    // transaction id for detailActivity
+    public static final String TRANSACTION_ID = "transaction_id";
 }

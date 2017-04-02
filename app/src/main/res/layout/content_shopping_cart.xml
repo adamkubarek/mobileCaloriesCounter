@@ -9,16 +9,18 @@
     tools:context="pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity"
     tools:showIn="@layout/activity_shopping_cart">
 
-    <ListView
-        android:layout_width="365dp"
-        android:layout_height="310dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/tr_detail_list_view"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/shopping_cart_listview" />
+        android:id="@+id/linearLayout"
+        android:layout_height="3dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorAccent"></LinearLayout>
 
     <Button
         android:text="@string/button_make_tansaction"
@@ -48,11 +50,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/shopping_text_calories"
-        android:layout_marginStart="64dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_cart_listview"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:layout_marginStart="32dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:text="@string/product_list_row_protein"
@@ -62,7 +66,9 @@
         android:layout_marginStart="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_text_calories" />
+        app:layout_constraintTop_toBottomOf="@+id/shopping_text_calories"
+        android:textSize="18sp"
+        android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:text="@string/product_list_row_fat"
@@ -72,7 +78,9 @@
         android:layout_marginStart="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_text_protein" />
+        app:layout_constraintTop_toBottomOf="@+id/shopping_text_protein"
+        android:textSize="18sp"
+        android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:text="@string/product_list_row_carbs"
@@ -82,7 +90,9 @@
         android:layout_marginStart="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_text_fat" />
+        app:layout_constraintTop_toBottomOf="@+id/shopping_text_fat"
+        android:textSize="18sp"
+        android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:text="@string/default_calories_number"
@@ -91,9 +101,11 @@
         android:id="@+id/shopping_value_calories"
         android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/shopping_text_calories"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_cart_listview"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:layout_marginTop="8dp"
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent" />
 
     <TextView
         android:text="@string/default_numeric_grams_value"
@@ -103,7 +115,10 @@
         android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/shopping_text_protein"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_value_calories" />
+        app:layout_constraintTop_toBottomOf="@+id/shopping_value_calories"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:text="@string/default_numeric_grams_value"
@@ -113,7 +128,10 @@
         android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/shopping_text_fat"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_value_protein" />
+        app:layout_constraintTop_toBottomOf="@+id/shopping_value_protein"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:text="@string/default_numeric_grams_value"
@@ -123,5 +141,35 @@
         android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/shopping_text_carbs"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/shopping_value_fat" />
+        app:layout_constraintTop_toBottomOf="@+id/shopping_value_fat"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textColor="@color/colorSecondaryText" />
+
+    <TextView
+        android:text="@string/empty_shopping_cart_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_shopping_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/tr_detail_list_view"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="32dp"
+        android:textStyle="normal|italic"
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent"
+        android:visibility="gone" />
+
+    <ListView
+        android:layout_width="365dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/tr_detail_list_view"
+        android:layout_height="290dp" />
 </android.support.constraint.ConstraintLayout>

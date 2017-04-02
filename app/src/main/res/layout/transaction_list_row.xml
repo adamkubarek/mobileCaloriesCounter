@@ -10,12 +10,12 @@
         android:id="@+id/transation_name_text"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:textStyle="normal|bold"
         android:textAlignment="viewStart"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="0dp"
+        android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:text="Data"
@@ -24,10 +24,11 @@
         android:id="@+id/transation_date_text"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:textAlignment="viewStart"
+        android:textStyle="normal|italic"
+        android:textAlignment="textEnd"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/colorAccent" />
 </LinearLayout>

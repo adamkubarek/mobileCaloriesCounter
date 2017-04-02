@@ -61,6 +61,31 @@ public class Product {
 //        parcel.writeLong(transactionId);
 //    }
 
+    public static Product getDetailProductFromCursor(Cursor cursor) {
+        long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
+        String name = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME));
+        String category = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CATEGORY));
+        int weight = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_WEIGHT));
+        double protein = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_PROTEIN));
+        double carbs = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_CARBS));
+        double fat = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_FAT));
+        int calories = cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_CALORIES));
+        long transactionId = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_MEAL_ID));
+
+        Product product = new Product();
+        product.setId(id);
+        product.setName(name);
+        product.setCategory(category);
+        product.setWeight(weight);
+        product.setProtein(protein);
+        product.setCarbs(carbs);
+        product.setFat(fat);
+        product.setCalories(calories);
+        product.setTransactionId(transactionId);
+
+        return product;
+    }
+
     public static Product getProductFromCursor(Cursor cursor) {
         long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
         String name = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME));

@@ -20,7 +20,7 @@ public class Formatter {
     }
 
     public static String formatCalories (int number) {
-        String result = Integer.toString(number) + "kcal";
+        String result = Integer.toString(number) + " kcal";
 
         return result;
     }

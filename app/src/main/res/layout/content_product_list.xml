@@ -9,6 +9,23 @@
     tools:context="pl.akubarek.fitcare.ui.productList.ProductListActivity"
     tools:showIn="@layout/activity_product_list">
 
+    <TextView
+        android:text="Ta lista jest pusta, utwórz nowe produkty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_product_list_text"
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="normal|italic"
+        app:layout_constraintTop_toTopOf="@+id/product_list_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/product_list_view"
+        app:layout_constraintVertical_bias="0.48000002"
+        android:autoText="false"
+        android:elevation="1dp"
+        android:visibility="gone" />
+
     <ListView
         android:layout_width="0dp"
         android:layout_height="0dp"

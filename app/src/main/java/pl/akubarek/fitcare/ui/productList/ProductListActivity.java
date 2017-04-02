@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
+
+    private TextView emptyTextForList;
 
     private final static String TAG = ProductListActivity.class.getSimpleName();
 
@@ -73,12 +76,19 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
         productListView.setOnItemLongClickListener(this);
         productListView.setOnItemClickListener(this);
+
+        emptyTextForList = (TextView) findViewById(R.id.empty_product_list_text);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         products = getAllProducts();
+        if (products.size() < 1) {
+            emptyTextForList.setVisibility(View.VISIBLE);
+        } else {
+            emptyTextForList.setVisibility(View.GONE);
+        }
         Log.d(TAG, "onStart: ");
     }
 
@@ -116,10 +126,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         Intent intent;
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_shopping_cart) {
-            finish();
-            return true;
-        } else if (id == R.id.action_transactions) {
+         if (id == R.id.action_transactions) {
             intent = new Intent(context, TransactionListActivity.class);
             startActivity(intent);
             return true;
@@ -332,6 +339,9 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 deleteProduct(product, position);
+                if (products.size() < 1) {
+                    emptyTextForList.setVisibility(View.VISIBLE);
+                }
             }
         });
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {

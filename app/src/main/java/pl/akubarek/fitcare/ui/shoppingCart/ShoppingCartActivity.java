@@ -46,6 +46,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private TextView allCarbs;
     private TextView allFat;
 
+    private TextView emptyTextForList;
+
     private Button btnConfirmTransaction;
     private Button btnClearCart;
 
@@ -69,7 +71,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
-        shoppingListView = (ListView) findViewById(R.id.shopping_cart_listview);
+        shoppingListView = (ListView) findViewById(R.id.tr_detail_list_view);
         Log.d(TAG, "onCreate: ");
 
         shoppingListView.setOnItemLongClickListener(this);
@@ -87,6 +89,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         allProtein = (TextView) findViewById(R.id.shopping_value_protein);
         allCarbs = (TextView) findViewById(R.id.shopping_value_carbs);
         allFat = (TextView) findViewById(R.id.shopping_value_fat);
+        emptyTextForList = (TextView) findViewById(R.id.empty_shopping_text);
 
         btnConfirmTransaction = (Button) findViewById(R.id.btn_make_tansaction);
         btnClearCart = (Button) findViewById(R.id.btn_clear_shopping_cart);
@@ -130,6 +133,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         super.onStart();
         Log.d(TAG, "onStart: ");
         shoppingProducts = getAllProductsFromCart();
+        if (shoppingProducts.size() < 1) {
+            emptyTextForList.setVisibility(View.VISIBLE);
+        } else {
+            emptyTextForList.setVisibility(View.GONE);
+        }
 
         ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
         shoppingListView.setAdapter(adapter);
@@ -218,6 +226,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 shoppingProducts.clear();
                 ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
                 shoppingListView.setAdapter(adapter);
+                emptyTextForList.setVisibility(View.VISIBLE);
                 calculateItemsInList();
             }
         }
@@ -290,6 +299,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 deleteProduct(product, position);
+                if (shoppingProducts.size() < 1) {
+                    emptyTextForList.setVisibility(View.VISIBLE);
+                }
             }
         });
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
