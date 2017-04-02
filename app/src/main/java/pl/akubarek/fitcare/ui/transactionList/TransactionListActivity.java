@@ -45,6 +45,7 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
+
         transactionList = (ListView) findViewById(R.id.transaction_list);
         transactionList.setOnItemClickListener(this);
         transactionList.setOnItemLongClickListener(this);
@@ -54,9 +55,16 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+        db = databaseHelper.getWritableDatabase();
         transactions = getAllTransactions();
         adapter = new TransactionListAdapter(context, transactions);
         transactionList.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        db.close();
     }
 
     @Override

@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity">
+
+    <item
+        android:id="@+id/action_preferences"
+        android:title="@string/diet_action_option_menu"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/shopping_productList"
         android:title="@string/product_list_menu_item"

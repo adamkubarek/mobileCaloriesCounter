@@ -38,12 +38,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "Meals cart created");
         Log.d(TAG, CREATE_MEALS_TABLE);
 
-
+        db.execSQL(CREATE_TEMP_SHOPPING_CART);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(CREATE_TEMP_SHOPPING_CART);
+
     }
 
     private static final String CREATE_PRODUCT_TABLE =

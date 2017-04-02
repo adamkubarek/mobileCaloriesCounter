@@ -60,6 +60,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
+
         productListView = (ListView) findViewById(R.id.product_list_view);
         products = getAllProducts();
 
@@ -83,6 +84,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     @Override
     protected void onStart() {
         super.onStart();
+        db = databaseHelper.getWritableDatabase();
         products = getAllProducts();
         if (products.size() < 1) {
             emptyTextForList.setVisibility(View.VISIBLE);
@@ -102,6 +104,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
+        db.close();
     }
 
     @Override
@@ -174,6 +177,11 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
                     ProductListAdapter productAdapter = new ProductListAdapter(context, products);
                     productListView.setAdapter(productAdapter);
+                    if (products.size() < 1) {
+                        emptyTextForList.setVisibility(View.VISIBLE);
+                    } else {
+                        emptyTextForList.setVisibility(View.GONE);
+                    }
 
                     dialog.dismiss();
                 } else {

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Ustawienia diety">
+
+        <SwitchPreference
+            android:key="bmr_algorithm"
+            android:title="@string/preference_bmr_title"
+            android:summary="@string/preference_bmr_summary"
+            android:id="@+id/algorithm_choice"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_manual_title"
+        android:dependency="bmr_algorithm">
+        <EditTextPreference
+            android:key="manual_calories_limit"
+            android:title="@string/preference_manual_sub_title"
+            android:summary="@string/preference_manual_summary"
+            android:inputType="numberSigned"
+            android:hint="@string/preference_manual_hint" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_category_title">
+        <EditTextPreference
+            android:key="edittext_height"
+            android:title="@string/preference_height_title"
+            android:summary="@string/preference_height_summary"
+            android:hint="@string/preference_height_hint"
+            android:inputType="numberSigned" />
+        <EditTextPreference
+            android:key="edittext_weight"
+            android:title="@string/preference_weight_title"
+            android:summary="@string/preference_weight_summary"
+            android:hint="@string/preference_weight_hint"
+            android:inputType="numberDecimal" />
+        <ListPreference
+            android:key="list_sex"
+            android:summary="@string/preference_sex_summary"
+            android:title="@string/preference_sex_title"
+            android:dialogTitle="@string/preference_sex_dialog_title"
+            android:entries="@array/sex_entries"
+            android:defaultValue="0"
+            android:entryValues="@array/sex_values" />
+        <EditTextPreference
+            android:key="edittext_age"
+            android:title="@string/preference_age_title"
+            android:summary="@string/preference_age_summary"
+            android:hint="@string/preference_age_hint"
+            android:inputType="numberSigned" />
+        <ListPreference
+            android:key="list_activity_level"
+            android:title="@string/preference_activity_level_title"
+            android:summary="@string/preference_activity_level_summary"
+            android:defaultValue="0"
+            android:dialogTitle="@string/preference_activity_level_dialog_title"
+            android:entries="@array/activity_level_entries"
+            android:entryValues="@array/activity_level_values" />
+        <ListPreference
+            android:key="list_diet_goals"
+            android:title="@string/preference_diet_goal_title"
+            android:summary="@string/preference_diet_goal_summary"
+            android:defaultValue="0"
+            android:dialogTitle="@string/preference_diet_goal_dialog_title"
+            android:entries="@array/diet_goals_entries"
+            android:entryValues="@array/diet_goals_values" />
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

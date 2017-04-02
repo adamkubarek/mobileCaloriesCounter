@@ -29,4 +29,14 @@ public class Constants {
 
     // transaction id for detailActivity
     public static final String TRANSACTION_ID = "transaction_id";
+
+    // Preference file keys
+    public static final String BMR_ALGORITHM = "bmr_algorithm";
+    public static final String MANUAL_LIMIT = "manual_calories_limit";
+    public static final String HEIGHT = "edittext_height";
+    public static final String WEIGHT = "edittext_weight";
+    public static final String SEX = "list_sex";
+    public static final String AGE = "edittext_age";
+    public static final String ACTIVITY_LEVEL = "list_activity_level";
+    public static final String DIET_GOALS = "list_diet_goals";
 }

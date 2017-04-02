@@ -5,10 +5,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +36,7 @@ import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
 import pl.akubarek.fitcare.model.Transaction;
+import pl.akubarek.fitcare.ui.additional.MyPreferencesActivity;
 import pl.akubarek.fitcare.ui.productList.ProductListActivity;
 import pl.akubarek.fitcare.ui.transactionList.TransactionListActivity;
 import pl.akubarek.fitcare.util.Constants;
@@ -45,6 +48,16 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private TextView allProtein;
     private TextView allCarbs;
     private TextView allFat;
+
+    private TextView maxCalories;
+    private TextView maxProtein;
+    private TextView maxCarbs;
+    private TextView maxFat;
+
+    private TextView percentCalories;
+    private TextView percentProtein;
+    private TextView percentCarbs;
+    private TextView percentFat;
 
     private TextView emptyTextForList;
 
@@ -59,6 +72,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
 
+    private SharedPreferences sharedPreferences;
+
+    private int globalCalories;
+
     private static final String TAG = ShoppingCartActivity.class.getSimpleName();
 
     @Override
@@ -70,6 +87,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         shoppingListView = (ListView) findViewById(R.id.tr_detail_list_view);
         Log.d(TAG, "onCreate: ");
@@ -90,6 +108,16 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         allCarbs = (TextView) findViewById(R.id.shopping_value_carbs);
         allFat = (TextView) findViewById(R.id.shopping_value_fat);
         emptyTextForList = (TextView) findViewById(R.id.empty_shopping_text);
+
+        maxCalories = (TextView) findViewById(R.id.prefMaxCalories);
+        maxProtein = (TextView) findViewById(R.id.prefMaxProtein);
+        maxCarbs = (TextView) findViewById(R.id.prefMaxCarbs);
+        maxFat = (TextView) findViewById(R.id.prefMaxFat);
+
+        percentCalories = (TextView) findViewById(R.id.prefCaloriesPercent);
+        percentProtein = (TextView) findViewById(R.id.prefProteinPercent);
+        percentCarbs = (TextView) findViewById(R.id.prefCarbsPercent);
+        percentFat = (TextView) findViewById(R.id.prefFatPercent);
 
         btnConfirmTransaction = (Button) findViewById(R.id.btn_make_tansaction);
         btnClearCart = (Button) findViewById(R.id.btn_clear_shopping_cart);
@@ -124,6 +152,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             intent = new Intent(context, TransactionListActivity.class);
             startActivity(intent);
             return true;
+        } else if (id == R.id.action_preferences) {
+            intent = new Intent(context, MyPreferencesActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,6 +164,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+        db = databaseHelper.getWritableDatabase();
         shoppingProducts = getAllProductsFromCart();
         if (shoppingProducts.size() < 1) {
             emptyTextForList.setVisibility(View.VISIBLE);
@@ -142,12 +175,161 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
         shoppingListView.setAdapter(adapter);
         calculateItemsInList();
+        globalCalories = fullCaloriesCalculation();
+        setMicrosAndCaloriesInLayout(globalCalories);
     }
+
+    private void setMicrosAndCaloriesInLayout(int calories) {
+        // carbs 45%
+        // protein 30%
+        // fat 25%
+        if (calories > 0) {
+            double maximumCarbs = ((double)calories*45)/400;
+            double maximumProtein = ((double)calories*30)/400;
+            double maximumFat = ((double)calories*25)/900;
+            maxCalories.setText("/"+Formatter.formatCalories(calories));
+            maxCarbs.setText("/"+Formatter.formatMicros(maximumCarbs));
+            maxProtein.setText("/"+Formatter.formatMicros(maximumProtein));
+            maxFat.setText("/"+Formatter.formatMicros(maximumFat));
+
+            double calc = Integer.valueOf(allCalories.getText().toString());
+            String tCarbs = allCarbs.getText().toString();
+            tCarbs = tCarbs.replace(",",".");
+            double carbs = Double.valueOf(tCarbs);
+            String tProtein = allProtein.getText().toString();
+            tProtein = tProtein.replace(",",".");
+            double protein = Double.valueOf(tProtein);
+            String tFat = allFat.getText().toString();
+            tFat = tFat.replace(",",".");
+            double fat = Double.valueOf(tFat);
+
+
+            double percCalories = (calc/calories)*100;
+            double percCarbs = (carbs/maximumCarbs)*100;
+            double percProtein = (protein/maximumProtein)*100;
+            double percFat = (fat/maximumFat)*100;
+
+            percentCalories.setText(Formatter.formatPercent(percCalories));
+            percentCarbs.setText(Formatter.formatPercent(percCarbs));
+            percentProtein.setText(Formatter.formatPercent(percProtein));
+            percentFat.setText(Formatter.formatPercent(percFat));
+
+            if (percCalories > 100) {
+                percentCalories.setTextColor(getResources().getColor(R.color.warning));
+            } else {
+                percentCalories.setTextColor(getResources().getColor(R.color.colorAccent));
+            }
+
+            if (percCarbs > 100) {
+                percentCarbs.setTextColor(getResources().getColor(R.color.warning));
+            } else {
+                percentCarbs.setTextColor(getResources().getColor(R.color.colorSecondaryText));
+            }
+
+            if (percProtein > 100) {
+                percentProtein.setTextColor(getResources().getColor(R.color.warning));
+            } else {
+                percentProtein.setTextColor(getResources().getColor(R.color.colorSecondaryText));
+            }
+
+            if (percFat > 100) {
+                percentFat.setTextColor(getResources().getColor(R.color.warning));
+            } else {
+                percentFat.setTextColor(getResources().getColor(R.color.colorSecondaryText));
+            }
+        }
+
+
+    }
+
+    private int fullCaloriesCalculation() {
+        boolean isManual = sharedPreferences.getBoolean(Constants.BMR_ALGORITHM, false);
+        String smanualCalories = sharedPreferences.getString(Constants.MANUAL_LIMIT, "0");
+        String sheight = sharedPreferences.getString(Constants.HEIGHT, "-1");
+        String sweight = sharedPreferences.getString(Constants.WEIGHT, "-1");
+        String ssex = sharedPreferences.getString(Constants.SEX, "0");
+        String sage = sharedPreferences.getString(Constants.AGE, "-1");
+        String sactivityLevel = sharedPreferences.getString(Constants.ACTIVITY_LEVEL, "0");
+        String sdietGoals = sharedPreferences.getString(Constants.DIET_GOALS, "0");
+
+        int basicCaloriesInDiet;
+        int caloriesInDiet = 1;
+        if (isManual) {
+            if (!smanualCalories.isEmpty()) {
+                caloriesInDiet = Integer.valueOf(smanualCalories);
+            }
+        } else {
+            if (!sheight.isEmpty() && !sweight.isEmpty() && !sage.isEmpty()) {
+                int sex = Integer.valueOf(ssex);
+                int activityLevel = Integer.valueOf(sactivityLevel);
+                int dietGoals = Integer.valueOf(sdietGoals);
+                int height = Integer.valueOf(sheight);
+                double weight = Double.valueOf(sweight);
+                int age = Integer.valueOf(sage);
+
+                if (sex == 0) {
+                    basicCaloriesInDiet = performAlgorithmForMan(height, weight, age, activityLevel);
+                } else {
+                    basicCaloriesInDiet = performAlgorithmForWoman(height, weight, age, activityLevel);
+                }
+
+                if (dietGoals == 0) {
+                    caloriesInDiet = reductionCalories(basicCaloriesInDiet);
+                } else if (dietGoals == 1) {
+                    caloriesInDiet = basicCaloriesInDiet;
+                } else {
+                    caloriesInDiet = developCalories(basicCaloriesInDiet);
+                }
+            }
+        }
+        return caloriesInDiet;
+    }
+
+    private int developCalories(int basicCaloriesInDiet) {
+        int calories = (int)((basicCaloriesInDiet*115)/100);
+        return calories;
+    }
+
+
+    private int reductionCalories(int basicCaloriesInDiet) {
+        int calories = (int)((basicCaloriesInDiet*75)/100);
+        return calories;
+    }
+
+    private int performAlgorithmForWoman(int height, double weight, int age, int activityLevel) {
+        int calories = (int) (655 + (9.6*weight) + (1.8*height) - (4.7*age));
+
+         if (activityLevel == 1) {
+             calories = (int)(calories*1.2);
+        } else if (activityLevel == 2) {
+             calories = (int)(calories*1.5);
+        } else if (activityLevel == 3) {
+             calories = (int)(calories*1.7);
+        }
+
+        return calories;
+    }
+
+    private int performAlgorithmForMan(int height, double weight, int age, int activityLevel) {
+        int calories = (int) (66 + (13.7*weight) + (5*height) - (6.8*age));
+
+        if (activityLevel == 1) {
+            calories = (int)(calories*1.2);
+        } else if (activityLevel == 2) {
+            calories = (int)(calories*1.5);
+        } else if (activityLevel == 3) {
+            calories = (int)(calories*1.7);
+        }
+
+        return calories;
+    }
+
 
     @Override
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
+        db.close();
     }
 
     @Override
@@ -179,10 +361,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             carbs += product.getCarbs();
             fat += product.getFat();
         }
-        allCalories.setText(Formatter.formatCalories(calories));
-        allProtein.setText(Formatter.formatMicros(protein));
-        allCarbs.setText(Formatter.formatMicros(carbs));
-        allFat.setText(Formatter.formatMicros(fat));
+        allCalories.setText(Formatter.formatCaloriesWithoutKcal(calories));
+        allProtein.setText(Formatter.formatMicrosWithoutG(protein));
+        allCarbs.setText(Formatter.formatMicrosWithoutG(carbs));
+        allFat.setText(Formatter.formatMicrosWithoutG(fat));
     }
 
     @Override
@@ -210,6 +392,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
                 shoppingListView.setAdapter(adapter);
                 calculateItemsInList();
+                setMicrosAndCaloriesInLayout(globalCalories);
                 Toast.makeText(context, "Usunięto produkt z listy", Toast.LENGTH_SHORT).show();
 
             } else {
@@ -228,6 +411,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 shoppingListView.setAdapter(adapter);
                 emptyTextForList.setVisibility(View.VISIBLE);
                 calculateItemsInList();
+                setMicrosAndCaloriesInLayout(globalCalories);
             }
         }
     }

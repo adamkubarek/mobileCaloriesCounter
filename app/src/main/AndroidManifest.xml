@@ -45,6 +45,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.akubarek.fitcare.ui.transactionList.TransactionListActivity" />
         </activity>
+
+        <activity android:name=".ui.additional.MyPreferencesActivity"/>
     </application>
 
 </manifest>

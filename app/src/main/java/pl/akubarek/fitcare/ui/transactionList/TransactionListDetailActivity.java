@@ -50,6 +50,7 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
+
         productsList = (ListView) findViewById(R.id.tr_detail_list_view);
         allCalories = (TextView) findViewById(R.id.detail_calories_value);
         allProtein = (TextView) findViewById(R.id.detail_protein_value);
@@ -61,11 +62,18 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+        db = databaseHelper.getWritableDatabase();
         long transactionId = getIntent().getLongExtra(Constants.TRANSACTION_ID, 0);
         products = getAllProductsFromTransaction(transactionId);
         adapter = new TransactionListDetailAdapter(context, products);
         productsList.setAdapter(adapter);
         calculateItemsInList();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        db.close();
     }
 
     @Override

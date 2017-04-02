@@ -24,7 +24,7 @@
     <string name="button_make_tansaction">Zrealizuj</string>
     <string name="button_clear_shoppingCart">Wyczyść koszyk</string>
     <string name="text_calories">Kalorie:</string>
-    <string name="default_calories_number">0 kcal</string>
+    <string name="default_calories_number">0</string>
     <string name="default_quantity_value">0g</string>
     <string name="text_number_weight_dialog">Podaj liczbę gramów produktu:</string>
     <string name="number_weight_dialog_hint">0g</string>
@@ -42,4 +42,64 @@
     <string name="meals_set_created_activity">Utworzone jadłospisy</string>
     <string name="meals_details_activity">Szczegóły jadłospisu</string>
     <string name="empty_shopping_cart_text">Ta lista jest pusta, dodaj produkty</string>
+    <string name="preference_bmr_title">Włącz/Wyłącz manualne uzupełnianie</string>
+    <string name="preference_bmr_summary">Włącz jeśli chcesz samodzielnie uzupełnić liczbę spożywanych dziennie kalorii</string>
+    <string name="preference_manual_title">Manualne uzupełnienie kalorii</string>
+    <string name="preference_manual_sub_title">Manualny limit kcal</string>
+    <string name="preference_manual_summary">Wprowadź liczbę kalorii do spożycia</string>
+    <string name="preference_manual_hint">0 kalorii</string>
+    <string name="preference_category_title">Algorytm Harrisa-Benedicta</string>
+    <string name="preference_height_title">Wzrost</string>
+    <string name="preference_height_summary">Podaj wzrost w cm</string>
+    <string name="preference_height_hint">0 cm</string>
+    <string name="preference_weight_title">Waga</string>
+    <string name="preference_weight_summary">Podaj wagę w kilogramach</string>
+    <string name="preference_weight_hint">0.0 kg</string>
+    <string name="preference_sex_summary">Podaj płeć</string>
+    <string name="preference_sex_title">Płeć</string>
+    <string name="preference_sex_dialog_title">Wybierz płeć</string>
+    <string name="preference_age_title">Wiek</string>
+    <string name="preference_age_summary">Podaj wiek</string>
+    <string name="preference_age_hint">wiek</string>
+    <string name="preference_activity_level_title">Poziom aktywności fizycznej</string>
+    <string name="preference_activity_level_summary">Określ poziom swojej aktywności fizycznej</string>
+    <string name="preference_activity_level_dialog_title">Wybierz odpowiednią opcję</string>
+    <string name="preference_diet_goal_title">Cel diety</string>
+    <string name="preference_diet_goal_summary">Określ cel prowadzenia diety</string>
+    <string name="preference_diet_goal_dialog_title">Wybierz odpowiednią opcję</string>
+    <string name="diet_action_option_menu">Ustawienia diety</string>
+    <string name="default_numeric_grams_value_no_g">0,00</string>
+    <string name="calories_with_slash">/0kcal</string>
+    <string name="default_grams_with_slash">/0,00g</string>
+    <string name="default_percent_value">0,00%</string>
+    <string-array name="sex_entries">
+        <item>Mężczyzna</item>
+        <item>Kobieta</item>
+    </string-array>
+    <string-array name="sex_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="activity_level_entries">
+        <item>Brak</item>
+        <item>Niska</item>
+        <item>Umiarkowana</item>
+        <item>Wysoka</item>
+    </string-array>
+    <string-array name="activity_level_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="diet_goals_entries">
+        <item>Redukcja wagi</item>
+        <item>Utrzymanie wagi</item>
+        <item>Zwiększenie wagi</item>
+    </string-array>
+    <string-array name="diet_goals_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

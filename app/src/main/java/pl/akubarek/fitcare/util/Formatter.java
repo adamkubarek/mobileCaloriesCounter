@@ -25,6 +25,21 @@ public class Formatter {
         return result;
     }
 
+    public static String formatCaloriesWithoutKcal (int number) {
+        String result = Integer.toString(number);
+
+        return result;
+    }
+
+    public static String formatMicrosWithoutG (double number) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        if (number >= 1) {
+            return df.format(number)+"";
+        } else {
+            return "0"+df.format(number);
+        }
+    }
+
     public static String formatQuantity (int number) {
         String result = Integer.toString(number) + "g";
 
@@ -35,4 +50,11 @@ public class Formatter {
         String displayDate = new SimpleDateFormat("dd MMMM", new Locale("pl", "DEU")).format(new Date(date));
         return displayDate;
     }
+
+    public static String formatPercent (double number) {
+        String result = Formatter.formatMicrosWithoutG(number)+"%";
+        return result;
+    }
+
+
 }
