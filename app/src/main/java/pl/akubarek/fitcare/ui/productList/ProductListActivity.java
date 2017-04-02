@@ -29,7 +29,6 @@ import java.util.List;
 import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
-import pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity;
 import pl.akubarek.fitcare.ui.transactionList.TransactionListActivity;
 import pl.akubarek.fitcare.util.Constants;
 
@@ -53,6 +52,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         setContentView(R.layout.activity_product_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
@@ -117,8 +117,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_shopping_cart) {
-            intent = new Intent(context, ShoppingCartActivity.class);
-            startActivity(intent);
+            finish();
             return true;
         } else if (id == R.id.action_transactions) {
             intent = new Intent(context, TransactionListActivity.class);
@@ -200,8 +199,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                     product.updateWeight(newWeight);
                     dialog.dismiss();
                     addToTempShoppingCart(product);
-                    Intent intent = new Intent(context, ShoppingCartActivity.class);
-                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(context, "Uzupełnij odpowiednio wszystkie pola", Toast.LENGTH_SHORT).show();
                 }

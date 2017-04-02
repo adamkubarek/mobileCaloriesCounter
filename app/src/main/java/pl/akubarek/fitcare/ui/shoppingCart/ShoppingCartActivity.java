@@ -34,6 +34,7 @@ import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
 import pl.akubarek.fitcare.model.Transaction;
+import pl.akubarek.fitcare.ui.productList.ProductListActivity;
 import pl.akubarek.fitcare.ui.transactionList.TransactionListActivity;
 import pl.akubarek.fitcare.util.Constants;
 import pl.akubarek.fitcare.util.Formatter;
@@ -70,17 +71,15 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         shoppingListView = (ListView) findViewById(R.id.shopping_cart_listview);
         Log.d(TAG, "onCreate: ");
-        shoppingProducts = getAllProductsFromCart();
 
-        ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
-        shoppingListView.setAdapter(adapter);
         shoppingListView.setOnItemLongClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(context, ProductListActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -99,8 +98,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             }
         });
 
-        calculateItemsInList();
-
         btnConfirmTransaction.setOnClickListener(this);
     }
 
@@ -117,7 +114,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.shopping_productList) {
-            finish();
+            intent = new Intent(context, ProductListActivity.class);
+            startActivity(intent);
             return true;
         } else if (id == R.id.action_transactions) {
             intent = new Intent(context, TransactionListActivity.class);
@@ -131,6 +129,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+        shoppingProducts = getAllProductsFromCart();
+
+        ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
+        shoppingListView.setAdapter(adapter);
+        calculateItemsInList();
     }
 
     @Override
