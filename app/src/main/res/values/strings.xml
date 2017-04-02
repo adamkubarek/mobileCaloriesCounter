@@ -35,4 +35,11 @@
     <string name="product_activity_label">Wybierz produkty</string>
     <string name="shopping_cart_activity_label">Wybrane produkty</string>
     <string name="option_menu_shopping_cart">Koszyk</string>
+    <string name="meal_transaction_name_text">Nazwa jadłospisu</string>
+    <string name="meal_transaction_edit_text_hint">wpisz własną nazwę</string>
+    <string name="transaction_dialog_button_add">Zrealizuj</string>
+    <string name="transaction_btn_dialog_cancel">Anuluj</string>
+    <string name="title_activity_transaction_list">TransactionListActivity</string>
+    <string name="transaction_list_made">Utworzone jadłospisy</string>
+    <string name="product_list_menu_item">Lista produktów</string>
 </resources>

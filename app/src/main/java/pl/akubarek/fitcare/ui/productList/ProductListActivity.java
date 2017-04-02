@@ -30,6 +30,7 @@ import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
 import pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity;
+import pl.akubarek.fitcare.ui.transactionList.TransactionListActivity;
 import pl.akubarek.fitcare.util.Constants;
 
 
@@ -44,11 +45,7 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
 
-
-    private Cursor cursor;
-
     private final static String TAG = ProductListActivity.class.getSimpleName();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +68,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             @Override
             public void onClick(View view) {
                 displayAddProductDialog();
-
             }
         });
 
@@ -84,7 +80,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         super.onStart();
         products = getAllProducts();
         Log.d(TAG, "onStart: ");
-
     }
 
     @Override
@@ -118,10 +113,15 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Intent intent;
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_shopping_cart) {
-            Intent intent = new Intent(context, ShoppingCartActivity.class);
+            intent = new Intent(context, ShoppingCartActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_transactions) {
+            intent = new Intent(context, TransactionListActivity.class);
             startActivity(intent);
             return true;
         }
@@ -208,8 +208,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             }
         });
         dialog.show();
-
-
     }
 
     @Override
@@ -246,7 +244,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         // 2. Wyciagnac go z bazy
         // 3. Wrzucic do arrayListy z bazodanowym ID
         // 4. Po wykonaniu w którymś momencie zadbać o refresh adaptera (onResume?)
-
     }
 
     @Override
@@ -264,7 +261,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             db.insertOrThrow(Constants.TEMP_CART_TABLE, null, values);
         } catch (SQLException e) {
             Toast.makeText(context, "Nie udało się dodać produktu", Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -326,7 +322,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     }
 
 
-
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
         final Product product = products.get(position);
@@ -348,7 +343,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             }
         });
         alert.show();
-
         return true;
     }
 }

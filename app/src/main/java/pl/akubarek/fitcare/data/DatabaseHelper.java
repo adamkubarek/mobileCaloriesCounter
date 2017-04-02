@@ -85,6 +85,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + Constants.COLUMN_PROTEIN + " NUMERIC, "
                     + Constants.COLUMN_FAT + " NUMERIC, "
                     + Constants.COLUMN_CARBS + " NUMERIC);";
-
-
 }

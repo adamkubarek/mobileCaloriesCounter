@@ -24,9 +24,6 @@ public class Constants {
     public static final String MEALS_TABLE = "meals";
     public final static String COLUMN_DATE_CREATED = "create_date";
 
-    // parcelable
-    public static final String PARCELABLE_PRODUCT = "parcelable_product";
-
     // shopping cart (Parcelable items) in bundle
     public static final String TEMP_CART_TABLE = "tempshop";
 }

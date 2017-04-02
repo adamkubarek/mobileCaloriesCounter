@@ -20,7 +20,6 @@ import pl.akubarek.fitcare.util.Formatter;
 
 public class ProductListAdapter extends ArrayAdapter<Product> {
 
-
     List <Product> products;
 
     public ProductListAdapter(Context context, List<Product> products) {
@@ -35,17 +34,12 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         TextView valueCarbs;
         TextView valueFat;
         TextView calories;
-
-//        TextView templateProtein;
-//        TextView templateCarbs;
-//        TextView templateFat;
     }
 
     @Override
     public int getCount() {
         return products.size();
     }
-
 
     @NonNull
     @Override

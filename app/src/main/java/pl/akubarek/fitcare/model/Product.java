@@ -178,6 +178,4 @@ public class Product {
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
-
-
 }

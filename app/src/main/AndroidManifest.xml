@@ -21,6 +21,10 @@
         <activity
             android:name=".ui.shoppingCart.ShoppingCartActivity"
             android:label="@string/shopping_cart_activity_label"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.transactionList.TransactionListActivity"
+            android:label="@string/title_activity_transaction_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
