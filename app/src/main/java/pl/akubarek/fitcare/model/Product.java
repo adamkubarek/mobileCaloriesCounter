@@ -19,48 +19,6 @@ public class Product {
     private double fat;
     private long transactionId;
 
-//    protected Product(Parcel in) {
-//        id = in.readLong();
-//        name = in.readString();
-//        category = in.readString();
-//        weight = in.readInt();
-//        calories = in.readInt();
-//        protein = in.readDouble();
-//        carbs = in.readDouble();
-//        fat = in.readDouble();
-//        transactionId = in.readLong();
-//    }
-//
-//    public static final Creator<Product> CREATOR = new Creator<Product>() {
-//        @Override
-//        public Product createFromParcel(Parcel in) {
-//            return new Product(in);
-//        }
-//
-//        @Override
-//        public Product[] newArray(int size) {
-//            return new Product[size];
-//        }
-//    };
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel parcel, int i) {
-//        parcel.writeLong(id);
-//        parcel.writeString(name);
-//        parcel.writeString(category);
-//        parcel.writeInt(weight);
-//        parcel.writeInt(calories);
-//        parcel.writeDouble(protein);
-//        parcel.writeDouble(carbs);
-//        parcel.writeDouble(fat);
-//        parcel.writeLong(transactionId);
-//    }
-
     public static Product getDetailProductFromCursor(Cursor cursor) {
         long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
         String name = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME));
@@ -122,8 +80,6 @@ public class Product {
         this.fat = fat;
     }
 
-
-    // method for mass dialog
     public void updateWeight (int newWeight) {
         setCalories((newWeight*getCalories())/this.weight);
         setCarbs((newWeight*getCarbs())/this.weight);

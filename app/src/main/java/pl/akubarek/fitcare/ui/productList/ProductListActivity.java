@@ -56,7 +56,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
-
         productListView = (ListView) findViewById(R.id.product_list_view);
         products = getAllProducts();
 
@@ -70,7 +69,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                 displayAddProductDialog();
             }
         });
-
         productListView.setOnItemLongClickListener(this);
         productListView.setOnItemClickListener(this);
 
@@ -91,29 +89,16 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
         db.close();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
     public void displayAddProductDialog () {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.add_product_dialog);
 
-        // find dialog fields;
         final EditText editName = (EditText) dialog.findViewById(R.id.editName);
         final EditText editCategory = (EditText) dialog.findViewById(R.id.editCategory);
         final EditText editCalories = (EditText) dialog.findViewById(R.id.editCalories);
@@ -130,7 +115,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                 dialog.dismiss();
             }
         });
-
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +137,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                     } else {
                         emptyTextForList.setVisibility(View.GONE);
                     }
-
                     dialog.dismiss();
                 } else {
                     Toast.makeText(context, "Uzupełnij odpowiednio wszystkie pola", Toast.LENGTH_SHORT).show();
@@ -167,10 +150,11 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         final Product product = products.get(position);
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.set_quantity_dialog);
-        // find dialog fields
+
         final EditText editQuantity = (EditText) dialog.findViewById(R.id.editQuantity);
         Button btnAdd = (Button) dialog.findViewById(R.id.send_product_btn);
         Button btnCancel = (Button) dialog.findViewById(R.id.cancel_action_btn);
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,8 +180,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     @Override
     public void addProduct(Product product) {
-        // poskladany product z dialogu
-        // 1. Insertnac go do bazy
         boolean successfulAdded = true;
         ContentValues values = new ContentValues();
         values.put(Constants.COLUMN_NAME, product.getName());
@@ -214,7 +196,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             Toast.makeText(context, "Nie udało się zapisać produktu", Toast.LENGTH_SHORT).show();
             successfulAdded = false;
         }
-
         if (successfulAdded) {
             Product productWithId = findNewestProductInTable();
             if (productWithId != null) {
@@ -224,10 +205,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                 Toast.makeText(context, "Nie udało dodać się produktu do listy", Toast.LENGTH_SHORT).show();
             }
         }
-
-        // 2. Wyciagnac go z bazy
-        // 3. Wrzucic do arrayListy z bazodanowym ID
-        // 4. Po wykonaniu w którymś momencie zadbać o refresh adaptera (onResume?)
     }
 
     @Override
@@ -250,11 +227,9 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     @Override
     public Product findNewestProductInTable() {
-        // Realizacja 2 pktu z addProduct, ewentualnie statyczna metoda w modelu produktu - wywołana tu z hardCoded selectem
-        // SELECT produkt z najwiekszym id (dzieki autoincrement)
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + Constants.PRODUCT_TABLE +
-                " ORDER BY " + Constants.COLUMN_ID + " DESC LIMIT 1", null); // return one newest product
+                " ORDER BY " + Constants.COLUMN_ID + " DESC LIMIT 1", null);
 
         Product product;
         if (cursor.moveToFirst()) {
@@ -267,8 +242,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
 
     @Override
     public void deleteProduct(Product product, int itemPosition) {
-        // wykonac w onLongItemClick
-        // 1. Wyciagnac z obiektu id i usunąc ten rekord z bazy
         if (db != null ) {
             int result = db.delete(Constants.PRODUCT_TABLE, Constants.COLUMN_ID + " = " +product.getId(), null);
             if (result > 0) {
@@ -280,8 +253,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
                 Toast.makeText(context, "Nie udało się usunąć produktu", Toast.LENGTH_SHORT).show();
             }
         }
-        // 2. itemPosition to id obiektu w liscie ... również usunąć
-        // 3. Po wykonaniu zadbać o refresh adaptera
     }
 
     @Override
@@ -289,7 +260,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         List <Product> products = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + Constants.PRODUCT_TABLE;
-
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -304,7 +274,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         displaySetQuantityDialog(position);
     }
-
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
@@ -326,7 +295,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
             }
         });
         alert.show();

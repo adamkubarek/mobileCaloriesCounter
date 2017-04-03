@@ -64,6 +64,4 @@ public class Formatter {
             return "0"+df.format(weight)+" kg";
         }
     }
-
-
 }

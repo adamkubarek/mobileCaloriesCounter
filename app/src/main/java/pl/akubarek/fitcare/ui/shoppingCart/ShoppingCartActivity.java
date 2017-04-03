@@ -91,8 +91,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         shoppingListView = (ListView) findViewById(R.id.tr_detail_list_view);
-        Log.d(TAG, "onCreate: ");
-
         shoppingListView.setOnItemLongClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -177,7 +175,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         } else {
             emptyTextForList.setVisibility(View.GONE);
         }
-
         ShoppingCartAdapter adapter = new ShoppingCartAdapter(context, shoppingProducts);
         shoppingListView.setAdapter(adapter);
         calculateItemsInList();
@@ -186,9 +183,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     }
 
     private void setMicrosAndCaloriesInLayout(int calories) {
-        // carbs 45%
-        // protein 30%
-        // fat 25%
         if (calories > 0) {
             double maximumCarbs = ((double)calories*45)/400;
             double maximumProtein = ((double)calories*30)/400;
@@ -208,7 +202,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             String tFat = allFat.getText().toString();
             tFat = tFat.replace(",",".");
             double fat = Double.valueOf(tFat);
-
 
             double percCalories = (calc/calories)*100;
             double percCarbs = (carbs/maximumCarbs)*100;
@@ -244,8 +237,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 percentFat.setTextColor(getResources().getColor(R.color.colorSecondaryText));
             }
         }
-
-
     }
 
     private int fullCaloriesCalculation() {
@@ -330,30 +321,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         return calories;
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
         db.close();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
     }
 
     private void calculateItemsInList() {

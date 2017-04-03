@@ -13,9 +13,6 @@ public class Measurement {
     private double weight;
     private long date;
 
-
-
-
     public static Measurement getMeasurementFromCursor (Cursor cursor) {
         long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
         double weight = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_WEIGHT));
@@ -30,7 +27,6 @@ public class Measurement {
     }
 
     public Measurement () {
-
     }
 
     public Measurement(double weight, long date) {

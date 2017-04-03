@@ -9,7 +9,6 @@ import pl.akubarek.fitcare.model.Product;
  */
 
 public interface DatabaseContract {
-
     void addProduct(Product product);
     Product findNewestProductInTable();
     void deleteProduct (Product product, int itemPosition);

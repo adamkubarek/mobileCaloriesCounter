@@ -36,10 +36,6 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
 
     private TransactionListDetailAdapter adapter;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

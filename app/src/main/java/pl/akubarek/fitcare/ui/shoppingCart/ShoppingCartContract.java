@@ -10,7 +10,6 @@ import pl.akubarek.fitcare.model.Transaction;
  */
 
 public interface ShoppingCartContract {
-
     List<Product> getAllProductsFromCart();
     void deleteProduct(Product product, int position);
     void clearShoppingCart();

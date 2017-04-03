@@ -3,7 +3,6 @@ package pl.akubarek.fitcare.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import pl.akubarek.fitcare.util.Constants;
 
@@ -16,8 +15,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final static int DB_VERSION = 4;
     private final static String DB_NAME = "fitcare.db";
 
-    private final static String TAG = DatabaseHelper.class.getSimpleName();
-
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -25,19 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_PRODUCT_TABLE);
-
-        Log.d(TAG, "Product list table created");
-        Log.d(TAG, CREATE_PRODUCT_TABLE);
-
         db.execSQL(CREATE_SHOPPING_TABLE);
-
-        Log.d(TAG, "Shopping cart created");
-        Log.d(TAG, CREATE_SHOPPING_TABLE);
-
         db.execSQL(CREATE_MEALS_TABLE);
-        Log.d(TAG, "Meals cart created");
-        Log.d(TAG, CREATE_MEALS_TABLE);
-
         db.execSQL(CREATE_TEMP_SHOPPING_CART);
     }
 

@@ -15,7 +15,6 @@ public class Transaction {
 
 
     public Transaction () {
-
     }
 
     public Transaction(String name, long destinationDate) {
@@ -34,7 +33,6 @@ public class Transaction {
         transaction.setDestinationDate(destinationDate);
 
         return transaction;
-
     }
 
     public long getId() {
