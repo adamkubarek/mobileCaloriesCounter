@@ -79,7 +79,7 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
     private void updateActionBar(String name, long date) {
         String actionBarName;
         String formatDate = Formatter.formatDate(date);
-        actionBarName = name + " " + formatDate;
+        actionBarName = name + " - " + formatDate;
         getSupportActionBar().setTitle(actionBarName);
     }
 

@@ -30,5 +30,5 @@
         android:paddingBottom="20dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="40dp"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>

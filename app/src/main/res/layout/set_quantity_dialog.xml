@@ -36,14 +36,18 @@
             android:text="@string/weight_number_dialog_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/send_product_btn"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText" />
 
         <Button
             android:text="@string/weight_numbe_dialog_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/cancel_action_btn"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText" />
     </LinearLayout>
 </LinearLayout>

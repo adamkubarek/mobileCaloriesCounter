@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/empty_product_list_text"
         android:textSize="18sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="normal|italic"
         app:layout_constraintTop_toTopOf="@+id/product_list_view"
         app:layout_constraintBottom_toBottomOf="parent"

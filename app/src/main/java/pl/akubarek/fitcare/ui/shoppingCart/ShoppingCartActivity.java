@@ -218,7 +218,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             if (percCalories > 100) {
                 percentCalories.setTextColor(getResources().getColor(R.color.warning));
             } else {
-                percentCalories.setTextColor(getResources().getColor(R.color.colorAccent));
+                percentCalories.setTextColor(getResources().getColor(R.color.colorPrimary));
             }
 
             if (percCarbs > 100) {

@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/transaction_list"
         android:textStyle="normal|italic"
         android:textSize="18sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"

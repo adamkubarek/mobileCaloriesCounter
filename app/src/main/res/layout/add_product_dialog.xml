@@ -132,15 +132,19 @@
             android:text="@string/button_add_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/button_add"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText" />
 
         <Button
             android:text="@string/button_cancel_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/button_cancel"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText" />
     </LinearLayout>
 
 </LinearLayout>

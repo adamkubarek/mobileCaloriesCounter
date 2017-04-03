@@ -33,7 +33,7 @@
         android:textSize="18sp"
         android:textStyle="normal|bold"
         app:layout_constraintHorizontal_bias="0.0"
-        android:textColor="@color/colorSecondaryText" />
+        android:textColor="@color/colorPrimary" />
 
     <TextView
         android:text="@string/product_list_row_protein"
@@ -121,6 +121,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        android:textColor="@color/colorAccent"
-        android:textStyle="normal|bold" />
+        android:textColor="@color/colorAccent" />
 </android.support.constraint.ConstraintLayout>
