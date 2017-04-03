@@ -85,13 +85,11 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
         } else {
             emptyTextForList.setVisibility(View.GONE);
         }
-        Log.d(TAG, "onStart: ");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop: ");
         db.close();
     }
 
@@ -201,8 +199,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
             if (productWithId != null) {
                 products.add(productWithId);
                 Toast.makeText(context, "Dodano nowy produkt", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "Nie udało dodać się produktu do listy", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -25,7 +25,6 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
     Context context = TransactionListDetailActivity.this;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
-
     private List<Product> products;
 
     private ListView productsList;
@@ -48,10 +47,8 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
         String name = getIntent().getStringExtra(Constants.TRANSACTION_NAME);
         updateActionBar(name, date);
 
-        Log.d(TAG, "onCreate: ");
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
-
 
         productsList = (ListView) findViewById(R.id.tr_detail_list_view);
         allCalories = (TextView) findViewById(R.id.detail_calories_value);
@@ -98,7 +95,6 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
                 cursor.moveToNext();
             }
         }
-
         return products;
     }
 

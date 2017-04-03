@@ -15,7 +15,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -167,7 +166,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart: ");
         db = databaseHelper.getWritableDatabase();
         shoppingProducts = getAllProductsFromCart();
         if (shoppingProducts.size() < 1) {
@@ -296,14 +294,13 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private int performAlgorithmForWoman(int height, double weight, int age, int activityLevel) {
         int calories = (int) (655 + (9.6*weight) + (1.8*height) - (4.7*age));
 
-         if (activityLevel == 1) {
+        if (activityLevel == 1) {
              calories = (int)(calories*1.2);
         } else if (activityLevel == 2) {
              calories = (int)(calories*1.5);
         } else if (activityLevel == 3) {
              calories = (int)(calories*1.7);
         }
-
         return calories;
     }
 
@@ -317,14 +314,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         } else if (activityLevel == 3) {
             calories = (int)(calories*1.7);
         }
-
         return calories;
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop: ");
         db.close();
     }
 
@@ -350,7 +345,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         List <Product> products = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + Constants.TEMP_CART_TABLE;
-
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -526,7 +520,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             });
             dialog.show();
         } else {
-            Toast.makeText(context, "Brak produktów w jadłospisie, uzupełnij listę", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Uzupełnij listę", Toast.LENGTH_SHORT).show();
         }
     }
 }

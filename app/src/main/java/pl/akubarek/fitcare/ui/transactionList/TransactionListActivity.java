@@ -59,7 +59,6 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
-
         transactionList = (ListView) findViewById(R.id.transaction_list);
         transactionList.setOnItemClickListener(this);
         transactionList.setOnItemLongClickListener(this);
@@ -85,20 +84,7 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop: ");
         db.close();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
     }
 
     @Override
@@ -110,9 +96,9 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
                 adapter = new TransactionListAdapter(context, transactions);
                 transactionList.setAdapter(adapter);
                 deleteTransactionProducts(transaction);
-                Toast.makeText(context, "Usunięto transakcję z listy", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Usunięto jadłospis z listy", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "Nie udało się usunąć transakcji", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Nie udało się usunąć jadłospisu", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -136,7 +122,7 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
     @Override
     public void deleteTransactionProducts(Transaction transaction) {
         if (db!= null) {
-            int result = db.delete(Constants.SHOPPING_TABLE, Constants.COLUMN_MEAL_ID + " = "+ transaction.getId(), null);
+            db.delete(Constants.SHOPPING_TABLE, Constants.COLUMN_MEAL_ID + " = "+ transaction.getId(), null);
         }
     }
 
