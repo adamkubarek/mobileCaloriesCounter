@@ -1,16 +1,20 @@
 package pl.akubarek.fitcare.ui.transactionList;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase db;
 
+    private TextView emptyListText;
+
     private static String TAG = TransactionListActivity.class.getSimpleName();
 
     @Override
@@ -42,6 +48,14 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
@@ -49,6 +63,8 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         transactionList = (ListView) findViewById(R.id.transaction_list);
         transactionList.setOnItemClickListener(this);
         transactionList.setOnItemLongClickListener(this);
+
+        emptyListText = (TextView) findViewById(R.id.transaction_empty_text);
     }
 
     @Override
@@ -59,17 +75,46 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         transactions = getAllTransactions();
         adapter = new TransactionListAdapter(context, transactions);
         transactionList.setAdapter(adapter);
+        if (transactions.size() < 1) {
+            emptyListText.setVisibility(View.VISIBLE);
+        } else {
+            emptyListText.setVisibility(View.GONE);
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: ");
         db.close();
     }
 
     @Override
-    public void deleteTransaction(Transaction transaction, int position) {
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    public void deleteTransaction(Transaction transaction, int position) {
+        if (db != null) {
+            int result = db.delete(Constants.MEALS_TABLE, Constants.COLUMN_ID + " = " + transaction.getId(), null);
+            if (result > 0) {
+                transactions.remove(position);
+                adapter = new TransactionListAdapter(context, transactions);
+                transactionList.setAdapter(adapter);
+                deleteTransactionProducts(transaction);
+                Toast.makeText(context, "Usunięto transakcję z listy", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Nie udało się usunąć transakcji", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -90,7 +135,9 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
 
     @Override
     public void deleteTransactionProducts(Transaction transaction) {
-
+        if (db!= null) {
+            int result = db.delete(Constants.SHOPPING_TABLE, Constants.COLUMN_MEAL_ID + " = "+ transaction.getId(), null);
+        }
     }
 
     @Override
@@ -98,11 +145,35 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         Toast.makeText(context, String.valueOf(transactions.get(position).getId()), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, TransactionListDetailActivity.class);
         intent.putExtra(Constants.TRANSACTION_ID, transactions.get(position).getId());
+        intent.putExtra(Constants.TRANSACTION_NAME, transactions.get(position).getName());
+        intent.putExtra(Constants.TRANSACTION_DATE, transactions.get(position).getDestinationDate());
         startActivity(intent);
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-        return false;
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
+        final Transaction transaction = transactions.get(position);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setCancelable(true);
+        alert.setTitle("Usuwanie");
+        alert.setMessage("Na pewno chcesz usunąć jadłospis?");
+        alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alert.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteTransaction(transaction, position);
+                if (transactions.size() < 1) {
+                    emptyListText.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        alert.show();
+        return true;
     }
 }

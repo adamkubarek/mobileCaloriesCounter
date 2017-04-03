@@ -29,6 +29,8 @@ public class Constants {
 
     // transaction id for detailActivity
     public static final String TRANSACTION_ID = "transaction_id";
+    public static final String TRANSACTION_NAME = "transaction_name";
+    public static final String TRANSACTION_DATE = "transaction_date";
 
     // Preference file keys
     public static final String BMR_ALGORITHM = "bmr_algorithm";

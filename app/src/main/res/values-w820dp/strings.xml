@@ -72,6 +72,7 @@
     <string name="calories_with_slash">/0kcal</string>
     <string name="default_grams_with_slash">/0,00g</string>
     <string name="default_percent_value">0,00%</string>
+    <string name="transaction_list_empty_text">Brak jadłospisów, utwórz nowy</string>
     <string-array name="sex_entries">
         <item>Mężczyzna</item>
         <item>Kobieta</item>

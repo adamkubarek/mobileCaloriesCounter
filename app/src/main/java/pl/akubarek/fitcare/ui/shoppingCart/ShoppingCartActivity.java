@@ -107,6 +107,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         allProtein = (TextView) findViewById(R.id.shopping_value_protein);
         allCarbs = (TextView) findViewById(R.id.shopping_value_carbs);
         allFat = (TextView) findViewById(R.id.shopping_value_fat);
+
         emptyTextForList = (TextView) findViewById(R.id.empty_shopping_text);
 
         maxCalories = (TextView) findViewById(R.id.prefMaxCalories);
@@ -292,7 +293,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
 
     private int reductionCalories(int basicCaloriesInDiet) {
-        int calories = (int)((basicCaloriesInDiet*75)/100);
+        int calories = (int)((basicCaloriesInDiet*80)/100);
         return calories;
     }
 

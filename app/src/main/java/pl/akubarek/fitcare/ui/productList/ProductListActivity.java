@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,8 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,7 +27,6 @@ import java.util.List;
 import pl.akubarek.fitcare.R;
 import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
-import pl.akubarek.fitcare.ui.transactionList.TransactionListActivity;
 import pl.akubarek.fitcare.util.Constants;
 
 
@@ -111,31 +107,6 @@ public class ProductListActivity extends AppCompatActivity implements DatabaseCo
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_product_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        Intent intent;
-
-        //noinspection SimplifiableIfStatement
-         if (id == R.id.action_transactions) {
-            intent = new Intent(context, TransactionListActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void displayAddProductDialog () {

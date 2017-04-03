@@ -47,6 +47,12 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        long date = getIntent().getLongExtra(Constants.TRANSACTION_DATE, 0);
+        String name = getIntent().getStringExtra(Constants.TRANSACTION_NAME);
+        updateActionBar(name, date);
+
+        Log.d(TAG, "onCreate: ");
         databaseHelper = new DatabaseHelper(context);
         db = databaseHelper.getWritableDatabase();
 
@@ -68,6 +74,13 @@ public class TransactionListDetailActivity extends AppCompatActivity implements 
         adapter = new TransactionListDetailAdapter(context, products);
         productsList.setAdapter(adapter);
         calculateItemsInList();
+    }
+
+    private void updateActionBar(String name, long date) {
+        String actionBarName;
+        String formatDate = Formatter.formatDate(date);
+        actionBarName = name + " " + formatDate;
+        getSupportActionBar().setTitle(actionBarName);
     }
 
     @Override
