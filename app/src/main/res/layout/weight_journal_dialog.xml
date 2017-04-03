@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp"
+    android:padding="30dp"
+    android:id="@+id/quantity_linear">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/set_measurement_text"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        android:text="@string/actual_weight_journal"
+        android:textColor="@color/colorSecondaryText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editWeightJournal"
+        android:hint="@string/weight_journal_hint"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondaryText"
+        android:inputType="numberDecimal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:text="@string/weight_number_dialog_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/weightJournal_ok_btn"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText" />
+
+        <Button
+            android:text="@string/weight_numbe_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/weightJournal_cancel_btn"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText" />
+    </LinearLayout>
+</LinearLayout>

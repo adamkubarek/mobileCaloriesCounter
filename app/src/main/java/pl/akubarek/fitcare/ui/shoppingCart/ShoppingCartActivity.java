@@ -37,6 +37,7 @@ import pl.akubarek.fitcare.data.DatabaseHelper;
 import pl.akubarek.fitcare.model.Product;
 import pl.akubarek.fitcare.model.Transaction;
 import pl.akubarek.fitcare.ui.additional.MyPreferencesActivity;
+import pl.akubarek.fitcare.ui.additional.WeightJournalActivity;
 import pl.akubarek.fitcare.ui.productList.ProductListActivity;
 import pl.akubarek.fitcare.ui.transactionList.TransactionListActivity;
 import pl.akubarek.fitcare.util.Constants;
@@ -155,6 +156,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             return true;
         } else if (id == R.id.action_preferences) {
             intent = new Intent(context, MyPreferencesActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_weight_journal) {
+            intent = new Intent(context, WeightJournalActivity.class);
             startActivity(intent);
             return true;
         }

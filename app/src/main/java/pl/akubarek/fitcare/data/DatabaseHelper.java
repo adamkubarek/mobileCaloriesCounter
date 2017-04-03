@@ -13,7 +13,7 @@ import pl.akubarek.fitcare.util.Constants;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private final static int DB_VERSION = 2;
+    private final static int DB_VERSION = 4;
     private final static String DB_NAME = "fitcare.db";
 
     private final static String TAG = DatabaseHelper.class.getSimpleName();
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
+        db.execSQL(CREATE_WEIGHT_JOURNAL_TABLE);
     }
 
     private static final String CREATE_PRODUCT_TABLE =
@@ -85,4 +85,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + Constants.COLUMN_PROTEIN + " NUMERIC, "
                     + Constants.COLUMN_FAT + " NUMERIC, "
                     + Constants.COLUMN_CARBS + " NUMERIC);";
+
+    private static final String CREATE_WEIGHT_JOURNAL_TABLE =
+            "CREATE TABLE " + Constants.WEIGHT_JOURNAL_TABLE + "("
+                    + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + Constants.COLUMN_WEIGHT + " NUMERIC, "
+                    + Constants.COLUMN_DATE_CREATED + " BIGINT);";
 }

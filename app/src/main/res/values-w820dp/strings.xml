@@ -73,6 +73,10 @@
     <string name="default_grams_with_slash">/0,00g</string>
     <string name="default_percent_value">0,00%</string>
     <string name="transaction_list_empty_text">Brak jadłospisów, utwórz nowy</string>
+    <string name="actual_weight_journal">Wpisz aktualną wagę</string>
+    <string name="weight_journal_hint">0,00 kg</string>
+    <string name="weight_journal_option_menu">Dziennik wagi</string>
+    <string name="weight_journal_label">Dziennik wagi</string>
     <string-array name="sex_entries">
         <item>Mężczyzna</item>
         <item>Kobieta</item>

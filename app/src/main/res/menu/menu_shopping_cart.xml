@@ -18,5 +18,10 @@
         android:title="@string/transaction_list_made"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_weight_journal"
+        android:title="@string/weight_journal_option_menu"
+        app:showAsAction="never" />
+
 
 </menu>

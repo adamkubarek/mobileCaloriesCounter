@@ -56,5 +56,14 @@ public class Formatter {
         return result;
     }
 
+    public static String formatWeight (double weight) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        if (weight >= 1) {
+            return df.format(weight)+" kg";
+        } else {
+            return "0"+df.format(weight)+" kg";
+        }
+    }
+
 
 }

@@ -25,32 +25,40 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.transactionList.TransactionListActivity"
             android:label="@string/meals_set_created_activity"
-            android:screenOrientation="portrait"
             android:parentActivityName=".ui.shoppingCart.ShoppingCartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity" />
-            </activity>
+        </activity>
         <activity
             android:name=".ui.transactionList.TransactionListDetailActivity"
             android:label="@string/meals_details_activity"
-            android:screenOrientation="portrait"
             android:parentActivityName=".ui.transactionList.TransactionListActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.akubarek.fitcare.ui.transactionList.TransactionListActivity" />
         </activity>
-
-        <activity android:name=".ui.additional.MyPreferencesActivity"/>
+        <activity android:name=".ui.additional.MyPreferencesActivity" />
+        <activity
+            android:name=".ui.additional.WeightJournalActivity"
+            android:label="@string/weight_journal_label"
+            android:parentActivityName=".ui.shoppingCart.ShoppingCartActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.akubarek.fitcare.ui.shoppingCart.ShoppingCartActivity" />
+        </activity>
     </application>
 
 </manifest>

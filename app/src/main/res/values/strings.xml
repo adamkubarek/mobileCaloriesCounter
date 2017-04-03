@@ -107,4 +107,9 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+    <string name="title_activity_weight_journal">WeightJournalActivity</string>
+    <string name="actual_weight_journal">Wpisz aktualną wagę</string>
+    <string name="weight_journal_hint">0,00 kg</string>
+    <string name="weight_journal_option_menu">Dziennik wagi</string>
+    <string name="weight_journal_label">Dziennik wagi</string>
 </resources>

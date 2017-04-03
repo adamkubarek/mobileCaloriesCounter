@@ -41,4 +41,7 @@ public class Constants {
     public static final String AGE = "edittext_age";
     public static final String ACTIVITY_LEVEL = "list_activity_level";
     public static final String DIET_GOALS = "list_diet_goals";
+
+    // weight journal table
+    public static final String WEIGHT_JOURNAL_TABLE = "weightjournal";
 }
